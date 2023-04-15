@@ -46,6 +46,7 @@ public class BarBeatManager : MonoBehaviour
         {
             //so the problem is that HitChecker gets called from a BeatBar, but it changes the color on the BeatReceiver
             //I think the solution is to have a list of beatbars and just check the first and the second one, maybe. Move the others down the list?
+            //I've started this process; now I'm just setting up the object pooling.
         }
 
         return hit;
