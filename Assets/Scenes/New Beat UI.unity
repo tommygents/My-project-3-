@@ -232,7 +232,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632876586}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.42858574, y: 0.04, z: -1.9631069}
+  m_LocalPosition: {x: 0.5, y: 0, z: -1.9631069}
   m_LocalScale: {x: 0.083544984, y: 0.4778744, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -255,6 +255,10 @@ MonoBehaviour:
   beatBar: {fileID: 854181172}
   BPM: 120
   windowSize: 0.1
+  beatInterval: 0
+  beatBars: []
+  bbIndex: 0
+  gameRunning: 1
 --- !u!4 &854181171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4431402592186334370, guid: bd8720937f3ad174e881a2bbb5ed1148, type: 3}
@@ -281,6 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1328981834}
   - component: {fileID: 1328981835}
+  - component: {fileID: 1328981836}
   m_Layer: 0
   m_Name: Beat Reciever
   m_TagString: Untagged
@@ -355,6 +360,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1328981836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328981833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59a536ba3b4f13418d522c6804691b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseColor: {r: 1, g: 0.9333334, b: 0, a: 0}
+  hitColor: {r: 0.18633425, g: 1, b: 0, a: 0}
+  missColor: {r: 1, g: 0, b: 0.02589655, a: 0}
+  leftEdge: 0
+  rightEdge: 0
 --- !u!1 &1405329170
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +477,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfac4482e28f7354380fc7f377f570b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beatReceiver: {fileID: 1328981836}
+  beatBar: {fileID: 854181172}
+  beatSpawner: {fileID: 632876588}
+  defaultSpeed: 1
+  beatBars: []
+  bbIndex: 0
+  gameRunning: 1
 --- !u!1001 &5536460956035639593
 PrefabInstance:
   m_ObjectHideFlags: 0

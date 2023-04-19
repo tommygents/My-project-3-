@@ -11,22 +11,23 @@ public class BeatSpawner : MonoBehaviour
     [SerializeField] private float BPM = 120.0f;
     [SerializeField] private float windowSize = 0.1f;
 
-    private float beatInterval;
+    public float beatInterval;
     private float nextBeatTime;
     private float halfWindowSize;
 
     private Vector3 pool = new Vector3(200,200);
 
     public List<BeatBar> beatBars;
+    public int bbIndex = 1;
+
+    public bool gameRunning = true;
 
     // Start is called before the first frame update
     void Start()
     {
         SetBPM(BPM);
         SetWindowSize(windowSize);
-        //Reset();
-        CreateObjectPool();
-        StartCoroutine(Spawn());
+       
     }
 
     // Update is called once per frame
@@ -36,13 +37,14 @@ public class BeatSpawner : MonoBehaviour
     }
 
 
-    
+    #region Dep beatspawning
+    /*
     public void SpawnBeat()
     {
         //BeatBar _bb = Instantiate(beatBar, this.transform.parent, false);
         BeatBar _bb = Instantiate(beatBar, this.transform.position, beatBar.transform.rotation, this.transform.parent);
         _bb.speed = defaultSpeed;
-        _bb.pool= pool;
+        _bb.pool = pool;
         beatBars.Add(_bb);
 
     }
@@ -56,7 +58,44 @@ public class BeatSpawner : MonoBehaviour
             yield return new WaitForSeconds(beatInterval);
         }
     }
+    */
+    #endregion
 
+    #region Object Pooling
+    //accessible method for starting the coroutine
+    public void StartSpawner(List<BeatBar> _bbPool)
+    {
+        StartCoroutine(SpawnerFromPool(_bbPool));
+    }
+    
+
+
+    //co-routine that spawns beatbars from the spawner
+    IEnumerator SpawnerFromPool(List<BeatBar> _bbPool)
+    {
+        while (gameRunning)
+        {
+            SpawnBeatFromPool(_bbPool);
+            yield return new WaitForSeconds(beatInterval);
+        }
+    }
+
+
+    //method for spawning individual beatbars
+    public void SpawnBeatFromPool(List<BeatBar> _bbPool)
+    {
+        BeatBar _bb = _bbPool[bbIndex];
+        _bb.transform.position = this.transform.position;
+        _bb.speed = defaultSpeed;
+        bbIndex++;
+        if (bbIndex >= beatBars.Count)
+        {
+            bbIndex = 0;
+        }
+    }
+
+
+    #endregion 
 
     private void SetBPM(float bpm)
     {
@@ -81,16 +120,8 @@ public class BeatSpawner : MonoBehaviour
         nextBeatTime = beatInterval;
     }
 
-    //method to create the object pool on Start()
-    private void CreateObjectPool()
-    {
-        for (int i=1;i < 20;i++)
-        {
-            BeatBar _bb = Instantiate(beatBar, pool, beatBar.transform.rotation, this.transform.parent);
-            beatBars.Add( _bb);
-            _bb.speed = 0;
-        }
-    }
+   
+    
 
     private void ObjectSpawn(BeatBar _bb)
     {

@@ -5,13 +5,19 @@ using UnityEngine;
 public class BeatBar : MonoBehaviour
 {
     public float speed = 1f;
-    private float leftEdge;
-    private float rightEdge;
+    public float leftEdge;
+    public float rightEdge;
     public Vector3 pool;
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
         
+    }
+
+    private void Awake()
+    {
+        spriteRenderer= GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -28,22 +34,25 @@ public class BeatBar : MonoBehaviour
 
     }
 
+    //moves the beatbar and updates the position of the edges
     private void MoveLeft()
     {
         transform.localPosition += -transform.right * speed * Time.deltaTime;
+        GetEdges();
     }
 
-    private void GetEdges()
+    public void GetEdges()
     {
-        float _x = this.transform.position.x;
-        float _w = this.transform.localScale.x;
+        float _x = spriteRenderer.bounds.center.x;
+        float _w = spriteRenderer.bounds.size.x;
         leftEdge = _x - (_w / 2);
         rightEdge = _x + (_w / 2);
     }
 
-    private void ReturnToPool()
+    public void ReturnToPool()
     {
         transform.position = pool;
         speed = 0;
+        GetEdges();
     }
 }
