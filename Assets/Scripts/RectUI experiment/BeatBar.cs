@@ -9,7 +9,7 @@ public class BeatBar : MonoBehaviour
     public float rightEdge;
     public Vector3 pool;
     public SpriteRenderer spriteRenderer;
-
+    public BarBeatManager bbm;
     void Start()
     {
         
@@ -29,7 +29,9 @@ public class BeatBar : MonoBehaviour
         //check for outside of parent object
         if (transform.localPosition.x < -.5f)
         {
+            bbm.OnMiss();
             ReturnToPool();
+
         }
 
     }

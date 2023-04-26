@@ -53,7 +53,16 @@ public class BeatReceiver : MonoBehaviour
         spriteRenderer.color = missColor;
     }
 
-  
+    public void HitColor(float alpha)
+    {
+        hitColor.a= alpha;
+        spriteRenderer.color = hitColor;
+    }
 
+    public void MissColor(float alpha)
+    {
+        missColor.a= alpha;
+        spriteRenderer.color = missColor;
+    }
 
 }
