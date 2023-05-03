@@ -686,7 +686,7 @@ MonoBehaviour:
   change: 0.125
   childSPs: []
   doomInd: {fileID: 767957417}
-  damageIndicator: {fileID: 0}
+  damageIndicator: {fileID: 400471514}
   damageTaken: 0
   flashTime: 6
   flashTimeCurrent: 0
